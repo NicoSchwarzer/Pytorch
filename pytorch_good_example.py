@@ -137,11 +137,39 @@ import matplotlib.pyplot as plt
 
 plt.plot(l_iterations, l_loss)
 
+## examining last loss 
+
+l_lossx = np.array(l_loss)
+fin = l_lossx.shape[0]
+
+first_loss = l_lossx[0]
+
+
+final_loss = l_lossx[2999]
+print(final_loss)
+
+
 
 ## Evaluating the model
 
 y_pred2 = model(x_test.float())
 y_pred2
 
-loss = loss_MSE(y_pred2, y_test)
+
+y_test = np.array(y_test)
+
+y_pred2 = torch.tensor(y_pred2)  #, require_grad = False)
+
+y_pred2
+# -169 
+
+y_pred2 = np.array(y_pred2)
+
+T = x_test.shape[0]
+
+loss_test = (y_test - y_pred2) * (y_test - y_pred2)
+loss = 1 / T *  np.sum(loss_test, axis = 0)
+
 loss
+loss[loss.shape[0]-1]
+
